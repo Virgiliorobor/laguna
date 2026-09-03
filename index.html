@@ -27,9 +27,9 @@ select{font-family:'IBM Plex Mono',monospace}
 </style>
 <script src="trip-data.js"></script>
 </helmet>
-<div style="max-width:1220px;margin:0 auto;padding:20px 22px 40px">
+<div style="max-width:1220px;margin:0 auto;padding:16px clamp(12px,4vw,22px) 40px">
 
-  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 2px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px 16px;flex-wrap:wrap;padding:10px 2px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
     <div style="display:flex;align-items:center;gap:14px">
       <div style="width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,158,87,.8);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#ffb27a">LS</div>
       <div style="font-size:13px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#e8ecf5">Laguna Seca <span style="color:#8b94ac;font-weight:300">· Weekend Board</span></div>
@@ -43,16 +43,6 @@ select{font-family:'IBM Plex Mono',monospace}
     <h1 style="margin:0;font-size:clamp(38px,6vw,72px);font-weight:200;letter-spacing:.06em;text-transform:uppercase;line-height:1.02">Race Weekend<br><span style="font-weight:700;background:linear-gradient(90deg,#5fd4ff,#ff5e8a 55%,#ff9e57);-webkit-background-clip:text;background-clip:text;color:transparent">Trip Board</span></h1>
     <p style="max-width:760px;color:#97a0b8;line-height:1.65;font-weight:300;margin:18px 0 0;font-size:15px">Four days, one racetrack, and a fighting chance at eating like you actually give a damn. Every slot has a default — the pick — plus a few worthy contenders. Change your mind and the route changes with you. The map buttons hand you off to Google, who knows the traffic better than either of us.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:34px">
-      <sc-for list="{{ gauges }}" as="g" hint-placeholder-count="4">
-        <div style="position:relative;padding:16px 18px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:{{ g.color }}"></div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8b94ac">{{ g.k }}</div>
-          <div style="font-size:21px;font-weight:600;margin-top:6px;letter-spacing:.02em">{{ g.v }}</div>
-        </div>
-      </sc-for>
-    </div>
-
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
       <button onClick="{{ openRoute }}" style="appearance:none;border:none;cursor:pointer;padding:12px 22px;border-radius:999px;font-family:'Saira',sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#160d06;background:linear-gradient(90deg,#ffb864,#ff8a5c);box-shadow:0 0 24px rgba(255,140,80,.28);transition:.2s" style-hover="box-shadow:0 0 36px rgba(255,140,80,.5);transform:translateY(-1px)">Open selected day route</button>
       <button onClick="{{ copyPlan }}" style="appearance:none;cursor:pointer;padding:12px 22px;border-radius:999px;font-family:'Saira',sans-serif;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#e8ecf5;background:transparent;border:1px solid rgba(255,255,255,.18);transition:.2s" style-hover="border-color:#7fd8ff;color:#7fd8ff">Copy plan</button>
@@ -63,14 +53,14 @@ select{font-family:'IBM Plex Mono',monospace}
   <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
     <section style="margin-top:34px;padding:18px 20px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8b94ac;margin-bottom:10px">Index legend</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:8px 28px;font-size:13px;font-weight:300;color:#b7bfd2;line-height:1.55">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:8px 28px;font-size:13px;font-weight:300;color:#b7bfd2;line-height:1.55">
         <div><span style="color:#ff8aa8;font-weight:600">Bourdain Index</span> — 10: real story, real regulars, zero pretense — the kind of place that says something true about where you are. 7–8: independent and worth it, just a little more combed-hair. 5–6: here because it's good or because it's on the way, not because it has a soul.</div>
         <div><span style="color:#7fd8ff;font-weight:600">Swan Match</span> — 10: closest to the Swan Oyster Depot ideal — a cramped seafood-first counter, walk up, no reservations, cold oysters, old-school to the bone.</div>
       </div>
     </section>
   </sc-if>
 
-  <nav style="display:flex;gap:6px;position:sticky;top:0;z-index:9;margin-top:30px;padding:12px 0 0;background:rgba(10,12,20,.92);backdrop-filter:blur(10px)">
+  <nav style="display:flex;gap:6px;position:sticky;top:0;z-index:9;margin-top:30px;padding:12px 0 0;background:rgba(10,12,20,.92);backdrop-filter:blur(10px);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch">
     <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
       <button onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
     </sc-for>
@@ -80,7 +70,7 @@ select{font-family:'IBM Plex Mono',monospace}
   <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
     <section style="padding-top:26px">
       <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
-        <h2 style="margin:0;font-size:32px;font-weight:300;letter-spacing:.08em;text-transform:uppercase">{{ dayDate }}</h2>
+        <h2 style="margin:0;font-size:clamp(23px,5.5vw,32px);font-weight:300;letter-spacing:.08em;text-transform:uppercase">{{ dayDate }}</h2>
         <div style="color:#8b94ac;font-weight:300;font-size:14px">{{ daySubtitle }}</div>
       </div>
 
@@ -98,8 +88,17 @@ select{font-family:'IBM Plex Mono',monospace}
         <div style="flex:1;min-width:260px">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#7fd8ff;margin-bottom:6px">Selected route</div>
           <div style="font-size:13px;color:#c3cad9;line-height:1.7;font-weight:300">{{ routeText }}</div>
+          <div style="font-size:11px;color:#8b94ac;margin-top:6px;font-weight:300">{{ routeHint }}</div>
         </div>
-        <a href="{{ routeUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;border:1px solid rgba(127,216,255,.45);color:#7fd8ff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:.2s" style-hover="background:rgba(127,216,255,.12)">Open live route</a>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ nextUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#160d06;background:linear-gradient(90deg,#ffb864,#ff8a5c);box-shadow:0 0 18px rgba(255,140,80,.25);transition:.2s" style-hover="box-shadow:0 0 30px rgba(255,140,80,.45)">Next: {{ nextName }}</a>
+          </sc-if>
+          <a href="{{ routeUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;border:1px solid rgba(127,216,255,.45);color:#7fd8ff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:.2s" style-hover="background:rgba(127,216,255,.12)">Open live route</a>
+          <sc-if value="{{ anyDone }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ resetDay }}" style="appearance:none;cursor:pointer;background:transparent;padding:11px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:#8b94ac;font-family:'Saira',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:.2s" style-hover="border-color:#8b94ac;color:#c3cad9">Reset day</button>
+          </sc-if>
+        </div>
       </div>
 
       <ul style="margin:18px 0 6px;padding:14px 18px 14px 34px;border-radius:12px;border:1px solid rgba(255,158,87,.25);background:linear-gradient(180deg,rgba(255,158,87,.05),transparent);color:#cfd5e2;font-size:13px;font-weight:300;line-height:1.5">
@@ -107,13 +106,15 @@ select{font-family:'IBM Plex Mono',monospace}
       </ul>
 
       <sc-for list="{{ slots }}" as="s" hint-placeholder-count="2">
-        <section style="margin:34px 0 10px">
+        <section style="{{ s.sectionStyle }}">
           <div style="display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px;margin-bottom:6px">
             <div style="font-family:'IBM Plex Mono',monospace;color:#7fd8ff;font-size:13px;font-weight:600;letter-spacing:.14em;min-width:150px">{{ s.time }}</div>
-            <div style="font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase">{{ s.title }}</div>
+            <div style="{{ s.titleStyle }}">{{ s.title }}</div>
+            <sc-if value="{{ s.isNext }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#160d06;background:linear-gradient(90deg,#ffb864,#ff8a5c);padding:4px 10px;border-radius:999px;letter-spacing:.1em">NEXT STOP</span></sc-if>
+            <button onClick="{{ s.toggleDone }}" style="{{ s.doneStyle }}">{{ s.doneLabel }}</button>
           </div>
           <p style="color:#8b94ac;font-size:13px;font-weight:300;margin:0 0 16px;line-height:1.5">{{ s.helper }}</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px">
             <sc-for list="{{ s.cards }}" as="c" hint-placeholder-count="3">
               <div style="{{ c.style }}">
                 <div onClick="{{ c.select }}" style="{{ c.pickStyle }}"></div>
@@ -168,16 +169,18 @@ select{font-family:'IBM Plex Mono',monospace}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;showLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;}}">
 class Component extends DCLogic {
-  state = { ready: false, day: 'friday', arrival: '09:00', sel: {}, toast: false };
+  state = { ready: false, day: 'friday', arrival: '09:00', sel: {}, done: {}, toast: false };
   componentDidMount() { this.waitData(); }
   waitData() {
     if (window.TRIP_DATA) {
       const D = window.TRIP_DATA;
       let sel = {};
       try { sel = JSON.parse(localStorage.getItem('ls-selections') || '{}'); } catch (e) {}
+      let done = {};
+      try { done = JSON.parse(localStorage.getItem('ls-done') || '{}'); } catch (e) {}
       Object.values(D.plan).forEach(d => d.slots.forEach(s => { if (!sel[s.id]) sel[s.id] = s.default; }));
       this.setState({
-        ready: true, sel,
+        ready: true, sel, done,
         day: localStorage.getItem('ls-current-day') || 'friday',
         arrival: localStorage.getItem('ls-friday-arrival') || '09:00'
       }, () => this.persist());
@@ -185,26 +188,50 @@ class Component extends DCLogic {
   }
   persist() {
     localStorage.setItem('ls-selections', JSON.stringify(this.state.sel));
+    localStorage.setItem('ls-done', JSON.stringify(this.state.done));
     localStorage.setItem('ls-current-day', this.state.day);
     localStorage.setItem('ls-friday-arrival', this.state.arrival);
   }
   D() { return window.TRIP_DATA; }
+  anyDone(day) {
+    return this.D().plan[day].slots.some(s => this.state.done[s.id]);
+  }
+  nextSlot(day) {
+    return this.D().plan[day].slots.find(s => {
+      if (this.state.done[s.id]) return false;
+      const id = this.state.sel[s.id] || s.default;
+      const p = this.D().places[id];
+      return id !== 'skip' && !p.route_option && !!p.address;
+    });
+  }
+  toggleDone(slotId) {
+    this.setState(st => ({ done: Object.assign({}, st.done, { [slotId]: !st.done[slotId] }) }), () => this.persist());
+  }
   routeIds(day) {
-    const d = this.D().plan[day], ids = [d.origin];
-    d.slots.forEach(s => { const id = this.state.sel[s.id] || s.default; if (id && id !== 'skip') ids.push(id); });
+    const d = this.D().plan[day], ids = [];
+    if (!this.anyDone(day)) ids.push(d.origin);
+    d.slots.forEach(s => { if (this.state.done[s.id]) return; const id = this.state.sel[s.id] || s.default; if (id && id !== 'skip') ids.push(id); });
     ids.push(d.finish);
     return ids.filter((id, i, a) => i === 0 || id !== a[i - 1]);
   }
   routeUrl(day) {
     const addrs = this.routeIds(day).map(id => this.D().places[id].address).filter(Boolean);
-    if (addrs.length < 2) return '#';
-    let u = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=' + encodeURIComponent(addrs[0]) + '&destination=' + encodeURIComponent(addrs[addrs.length - 1]);
-    const w = addrs.slice(1, -1);
+    if (!addrs.length) return '#';
+    // Mid-day (something crossed off): no origin — Google Maps starts from the phone's live location.
+    let u = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + encodeURIComponent(addrs[addrs.length - 1]);
+    const w = addrs.slice(0, -1);
+    if (!this.anyDone(day)) {
+      if (addrs.length < 2) return '#';
+      u += '&origin=' + encodeURIComponent(addrs[0]);
+      w.shift();
+    }
     if (w.length) u += '&waypoints=' + encodeURIComponent(w.join('|'));
     return u;
   }
   routeText(day) {
-    return this.routeIds(day).map(id => this.D().places[id].name.replace(' — Monterey Flagship', '').replace(' — Story Rd', '')).join('  →  ');
+    const names = this.routeIds(day).map(id => this.D().places[id].name.replace(' — Monterey Flagship', '').replace(' — Story Rd', ''));
+    if (this.anyDone(day)) names.unshift('Wherever you are');
+    return names.join('  →  ');
   }
   unavailable(pid) {
     if (this.state.day !== 'friday') return false;
@@ -220,8 +247,9 @@ class Component extends DCLogic {
       lines.push('', d.date + ' — ' + d.subtitle);
       d.slots.forEach(s => {
         const id = this.state.sel[s.id] || s.default;
-        if (id === 'skip') lines.push('• ' + s.time + ': skip');
-        else lines.push('• ' + s.time + ': ' + this.D().places[id].name + ' — ' + this.D().places[id].address);
+        const mark = this.state.done[s.id] ? '[done] ' : '';
+        if (id === 'skip') lines.push('• ' + mark + s.time + ': skip');
+        else lines.push('• ' + mark + s.time + ': ' + this.D().places[id].name + ' — ' + this.D().places[id].address);
       });
     });
     return lines.join('\n');
@@ -279,29 +307,56 @@ class Component extends DCLogic {
         style: {
           appearance: 'none', cursor: 'pointer', background: 'transparent', border: 'none',
           borderBottom: active ? '2px solid #ff9e57' : '2px solid transparent',
-          color: active ? '#ffb27a' : '#8b94ac', padding: '10px 18px', fontFamily: "'Saira',sans-serif",
-          fontSize: '13px', fontWeight: active ? 600 : 400, letterSpacing: '.16em', textTransform: 'uppercase', transition: '.2s'
+          color: active ? '#ffb27a' : '#8b94ac', padding: '10px 14px', fontFamily: "'Saira',sans-serif",
+          fontSize: '13px', fontWeight: active ? 600 : 400, letterSpacing: '.16em', textTransform: 'uppercase', transition: '.2s',
+          whiteSpace: 'nowrap', flex: '0 0 auto'
         }
       };
     });
-    const gauges = [
-      { k: 'Friday Coffee Lock', v: 'Moonwake', color: '#5fd4ff' },
-      { k: 'Friday Swan Play', v: 'Oystertown', color: '#ff5e8a' },
-      { k: 'Saturday P1', v: 'Captain + Stoker', color: '#ff9e57' },
-      { k: 'Sunday Egress', v: 'Leave Late', color: '#ffd27f' },
-      { k: 'Monday Goodbye', v: 'Fast or Hwy 1', color: '#7fd8ff' }
-    ];
-    if (!ready) return { ready: false, showLegend, tabs, gauges, openRoute: () => {}, copyPlan: () => {}, sharePlan: () => {}, toast: false };
+    if (!ready) return { ready: false, showLegend, tabs, openRoute: () => {}, copyPlan: () => {}, sharePlan: () => {}, toast: false };
     const day = this.D().plan[this.state.day];
     return {
-      ready: true, showLegend, tabs, gauges, toast: this.state.toast,
+      ready: true, showLegend, tabs, toast: this.state.toast,
       isFriday: this.state.day === 'friday',
       arrival: this.state.arrival,
       arrivalOpts: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00'],
       onArrival: (e) => this.setState({ arrival: e.target.value }, () => this.persist()),
       dayDate: day.date, daySubtitle: day.subtitle, notes: day.notes,
       routeText: this.routeText(this.state.day), routeUrl: this.routeUrl(this.state.day),
-      slots: day.slots.map(s => ({ time: s.time, title: s.title, helper: s.helper || '', cards: s.options.map(id => this.cardVM(id, s)) })),
+      routeHint: this.anyDone(this.state.day)
+        ? 'Crossed-off stops are history — this route starts from wherever you’re standing now.'
+        : 'The whole day, first stop to last. Cross stops off as you go and the route keeps up.',
+      anyDone: this.anyDone(this.state.day),
+      hasNext: !!this.nextSlot(this.state.day),
+      nextName: (() => { const n = this.nextSlot(this.state.day); return n ? this.D().places[this.state.sel[n.id] || n.default].name.split(' — ')[0].split(' / ')[0] : ''; })(),
+      nextUrl: (() => { const n = this.nextSlot(this.state.day); return n ? 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + encodeURIComponent(this.D().places[this.state.sel[n.id] || n.default].address) : '#'; })(),
+      resetDay: () => {
+        this.setState(st => {
+          const done = Object.assign({}, st.done);
+          day.slots.forEach(s => { delete done[s.id]; });
+          return { done };
+        }, () => this.persist());
+      },
+      slots: day.slots.map(s => {
+        const isDone = !!this.state.done[s.id];
+        const n = this.nextSlot(this.state.day);
+        return {
+          time: s.time, title: s.title, helper: s.helper || '',
+          cards: s.options.map(id => this.cardVM(id, s)),
+          sectionStyle: { margin: '34px 0 10px', opacity: isDone ? .4 : 1, transition: '.25s' },
+          titleStyle: { fontSize: '20px', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: isDone ? 'line-through' : 'none' },
+          isNext: this.anyDone(this.state.day) && !!n && n.id === s.id,
+          toggleDone: () => this.toggleDone(s.id),
+          doneLabel: isDone ? '↩ Undo' : '✓ Been there',
+          doneStyle: {
+            appearance: 'none', cursor: 'pointer', marginLeft: 'auto', padding: '6px 12px', borderRadius: '999px',
+            fontFamily: "'IBM Plex Mono',monospace", fontSize: '10px', letterSpacing: '.12em', textTransform: 'uppercase', transition: '.2s',
+            background: isDone ? 'rgba(103,255,157,.1)' : 'transparent',
+            color: isDone ? '#67ff9d' : '#8b94ac',
+            border: isDone ? '1px solid rgba(103,255,157,.4)' : '1px solid rgba(255,255,255,.18)'
+          }
+        };
+      }),
       openRoute: () => window.open(this.routeUrl(this.state.day), '_blank'),
       copyPlan: async () => {
         await navigator.clipboard.writeText(this.planText());
