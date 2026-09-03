@@ -112,9 +112,9 @@ window.TRIP_DATA = {
     "phils": {
       "name": "Phil's Fish Market & Eatery",
       "address": "10700 Merritt St, Castroville, CA 95012",
-      "desc": "Everybody knows Phil's. That is not a crime. Yes, it's been on TV. Yes, there will be a line. The cioppino got famous the honest way — by being good — and famous doesn't automatically mean finished.",
-      "order": "The cioppino, if you want the dish that built the reputation. Otherwise whatever fish looks happiest.",
-      "tags": ["seafood", "institution", "route option"],
+      "desc": "Everybody knows Phil's, and here's the catch nobody puts on the sign: the Phil's that got famous lived on the water in Moss Landing. It moved to Castroville in 2022, and the locals have been arguing about it ever since — half still swear by the cioppino, the other half say the soul stayed behind at the harbor and quietly order at Sea Harvest or Woodward now. Both halves are telling you the truth as they ate it.",
+      "order": "If you come, come for the cioppino — the dish that built the legend — and judge it on what's in the bowl, not what's out the window. If it's the harbor you're after, that's Sea Harvest and Woodward's argument now.",
+      "tags": ["seafood", "famous", "moved from the water"],
       "hours": "Fri 10:00 AM–8:00 PM",
       "website": "https://philsfishmarket.com/",
       "instagram": "https://www.instagram.com/philsfishmarket/",
@@ -437,7 +437,7 @@ window.TRIP_DATA = {
           "type": "choice",
           "default": "skip",
           "options": ["skip", "seaharvest_moss", "woodward", "phils", "meatery"],
-          "helper": "Sea Harvest is the smart default. Woodward is the one the locals would rather you didn't know about. Phil's is the famous one — no shame in it."
+          "helper": "Sea Harvest is the smart default. Woodward is the one the locals would rather you didn't know about. Phil's is the famous one — read the card before you commit, there's a catch."
         },
         {
           "id": "fri_checkin",
