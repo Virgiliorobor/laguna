@@ -353,14 +353,14 @@ window.TRIP_DATA = {
       "swan": null
     },
     "mezzaluna": {
-      "name": "Mezzaluna Pasteria & Mozzarella Bar",
+      "name": "Alfredo's Pastaria & Mozzarella Bar",
       "address": "1188 Forest Ave, Pacific Grove, CA 93950",
-      "desc": "A chef rolling pasta and pulling mozzarella by hand in Pacific Grove, because somebody still should. The strongest case on this trip for a night off from seafood — and the case is made in Dungeness crab cappellacci, so nobody's really losing.",
-      "order": "Share the Tre Mozzarelle or the grilled octopus, then two or three different pastas for the table. The crab cappellacci and lobster linguine are the ones to fight over.",
+      "desc": "This was Mezzaluna until the chef sold it to Alfredo Ortiz — the guy who ran the room for years — and that's the best kind of succession story there is. Same kitchen, pasta and mozzarella still made by hand daily, because somebody in Pacific Grove still should. The strongest case on this trip for a night off from seafood.",
+      "order": "Share the mozzarella or the grilled octopus, then two or three different handmade pastas for the table. If the Dungeness crab cappellacci is on, that's the one to fight over.",
       "tags": ["italian", "handmade pasta", "artisan"],
       "hours": "Fri–Sun 5:00 PM–9:00 PM",
-      "website": "https://www.mezzalunapasteria.com/",
-      "instagram": "https://www.instagram.com/mezzalunapasteria/",
+      "website": "https://www.opentable.com/r/alfredos-pastaria-and-mozzarella-bar-pacific-grove",
+      "instagram": "https://www.instagram.com/alfredospastariaandmozzbar/",
       "bourdain": 8,
       "swan": null
     },
@@ -502,7 +502,7 @@ window.TRIP_DATA = {
           "type": "choice",
           "default": "wildfish",
           "options": ["wildfish", "whalingstation", "mezzaluna", "spottedduck", "sandbar", "otherbrother"],
-          "helper": "Wild Fish for serious seafood. Whaling Station if qualifying earned a steak off a silver tray. Mezzaluna for handmade pasta. Sandbar for the wharf. Other Brother if all you want is a beer and something with your hands."
+          "helper": "Wild Fish for serious seafood. Whaling Station if qualifying earned a steak off a silver tray. Alfredo's for handmade pasta. Sandbar for the wharf. Other Brother if all you want is a beer and something with your hands."
         }
       ]
     },
@@ -541,7 +541,7 @@ window.TRIP_DATA = {
           "type": "choice",
           "default": "otherbrother",
           "options": ["otherbrother", "whalingstation", "mezzaluna", "alvarado", "sandbar", "wildfish"],
-          "helper": "Other Brother is the soft landing. Whaling Station or Mezzaluna if the last night deserves a proper send-off. Sandbar or Wild Fish if the ocean's still calling."
+          "helper": "Other Brother is the soft landing. Whaling Station or Alfredo's if the last night deserves a proper send-off. Sandbar or Wild Fish if the ocean's still calling."
         }
       ]
     },
