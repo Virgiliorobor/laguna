@@ -352,6 +352,30 @@ window.TRIP_DATA = {
       "bourdain": null,
       "swan": null
     },
+    "mezzaluna": {
+      "name": "Mezzaluna Pasteria & Mozzarella Bar",
+      "address": "1188 Forest Ave, Pacific Grove, CA 93950",
+      "desc": "A chef rolling pasta and pulling mozzarella by hand in Pacific Grove, because somebody still should. The strongest case on this trip for a night off from seafood — and the case is made in Dungeness crab cappellacci, so nobody's really losing.",
+      "order": "Share the Tre Mozzarelle or the grilled octopus, then two or three different pastas for the table. The crab cappellacci and lobster linguine are the ones to fight over.",
+      "tags": ["italian", "handmade pasta", "artisan"],
+      "hours": "Fri–Sun 5:00 PM–9:00 PM",
+      "website": "https://www.mezzalunapasteria.com/",
+      "instagram": "https://www.instagram.com/mezzalunapasteria/",
+      "bourdain": 8,
+      "swan": null
+    },
+    "whalingstation": {
+      "name": "Whaling Station Steakhouse",
+      "address": "763 Wave St, Monterey, CA 93940",
+      "desc": "An old-school Monterey steakhouse, fifty-plus years deep, where they still bring the USDA Prime out on a silver tray so you can point at your dinner like a person of consequence. Tableside Caesar, prime rib, a serious wine list, and a bar with its own congregation of regulars. They don't build them like this anymore.",
+      "order": "Go classic: Prime ribeye or New York strip, the tableside Caesar, one proper steakhouse side. If the Snake River Farms wagyu prime rib is on, order both and settle the argument at the table.",
+      "tags": ["steakhouse", "old school", "monterey institution"],
+      "hours": "Daily 4:30 PM–9:00 PM",
+      "website": "https://thewhalingstation.com/",
+      "instagram": "https://www.instagram.com/whalingstation/",
+      "bourdain": 9,
+      "swan": null
+    },
     "skip": {
       "name": "Skip this stop",
       "address": "",
@@ -477,8 +501,8 @@ window.TRIP_DATA = {
           "title": "Post-track dinner",
           "type": "choice",
           "default": "wildfish",
-          "options": ["wildfish", "spottedduck", "sandbar", "otherbrother"],
-          "helper": "Wild Fish for serious seafood. Sandbar for the wharf. Other Brother if all you want is a beer and something with your hands."
+          "options": ["wildfish", "whalingstation", "mezzaluna", "spottedduck", "sandbar", "otherbrother"],
+          "helper": "Wild Fish for serious seafood. Whaling Station if qualifying earned a steak off a silver tray. Mezzaluna for handmade pasta. Sandbar for the wharf. Other Brother if all you want is a beer and something with your hands."
         }
       ]
     },
@@ -516,8 +540,8 @@ window.TRIP_DATA = {
           "title": "Post-race dinner / beers",
           "type": "choice",
           "default": "otherbrother",
-          "options": ["otherbrother", "alvarado", "sandbar", "wildfish"],
-          "helper": "Other Brother is the soft landing. Sandbar or Wild Fish if the ocean's still calling."
+          "options": ["otherbrother", "whalingstation", "mezzaluna", "alvarado", "sandbar", "wildfish"],
+          "helper": "Other Brother is the soft landing. Whaling Station or Mezzaluna if the last night deserves a proper send-off. Sandbar or Wild Fish if the ocean's still calling."
         }
       ]
     },
