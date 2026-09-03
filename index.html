@@ -178,7 +178,8 @@ class Component extends DCLogic {
       try { sel = JSON.parse(localStorage.getItem('ls-selections') || '{}'); } catch (e) {}
       let done = {};
       try { done = JSON.parse(localStorage.getItem('ls-done') || '{}'); } catch (e) {}
-      Object.values(D.plan).forEach(d => d.slots.forEach(s => { if (!sel[s.id]) sel[s.id] = s.default; }));
+      // Reset any selection whose place no longer exists (renamed/removed between deploys).
+      Object.values(D.plan).forEach(d => d.slots.forEach(s => { if (!sel[s.id] || !D.places[sel[s.id]]) sel[s.id] = s.default; }));
       this.setState({
         ready: true, sel, done,
         day: localStorage.getItem('ls-current-day') || 'friday',
