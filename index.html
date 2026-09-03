@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laguna Seca Trip Board</title>
+<script>
+// Serve React from this repo instead of unpkg so the board has no runtime CDN dependency.
+window.__resources = {
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom.production.min.js"
+};
+</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@200;300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0c14;color:#f2f4fa;font-family:'Saira',sans-serif;
+background-image:radial-gradient(1200px 500px at 50% -10%, rgba(255,110,80,.10), transparent 60%),radial-gradient(900px 400px at 15% 0%, rgba(95,180,255,.07), transparent 60%),radial-gradient(900px 400px at 85% 5%, rgba(255,94,138,.06), transparent 60%);}
+a{color:#7fd8ff;text-decoration:none} a:hover{color:#ffb27a}
+select{font-family:'IBM Plex Mono',monospace}
+::selection{background:rgba(255,140,80,.35)}
+</style>
+<script src="trip-data.js"></script>
+</helmet>
+<div style="max-width:1220px;margin:0 auto;padding:20px 22px 40px">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 2px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,158,87,.8);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#ffb27a">LS</div>
+      <div style="font-size:13px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#e8ecf5">Laguna Seca <span style="color:#8b94ac;font-weight:300">· Weekend Board</span></div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8b94ac">SEP 04–06 · MONTEREY, CA</div>
+  </div>
+  <div style="height:2px;background:linear-gradient(90deg,#5fd4ff,#ff5e8a 45%,#ff9e57 75%,transparent);opacity:.85"></div>
+
+  <section style="padding:44px 2px 8px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#ff9e57;margin-bottom:14px">Mission Foods Grand Prix of Monterey</div>
+    <h1 style="margin:0;font-size:clamp(38px,6vw,72px);font-weight:200;letter-spacing:.06em;text-transform:uppercase;line-height:1.02">Race Weekend<br><span style="font-weight:700;background:linear-gradient(90deg,#5fd4ff,#ff5e8a 55%,#ff9e57);-webkit-background-clip:text;background-clip:text;color:transparent">Trip Board</span></h1>
+    <p style="max-width:760px;color:#97a0b8;line-height:1.65;font-weight:300;margin:18px 0 0;font-size:15px">Three days, one racetrack, and a fighting chance at eating like you actually give a damn. Every slot has a default — the pick — plus a few worthy contenders. Change your mind and the route changes with you. The map buttons hand you off to Google, who knows the traffic better than either of us.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:34px">
+      <sc-for list="{{ gauges }}" as="g" hint-placeholder-count="4">
+        <div style="position:relative;padding:16px 18px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:{{ g.color }}"></div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8b94ac">{{ g.k }}</div>
+          <div style="font-size:21px;font-weight:600;margin-top:6px;letter-spacing:.02em">{{ g.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
+      <button onClick="{{ openRoute }}" style="appearance:none;border:none;cursor:pointer;padding:12px 22px;border-radius:999px;font-family:'Saira',sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#160d06;background:linear-gradient(90deg,#ffb864,#ff8a5c);box-shadow:0 0 24px rgba(255,140,80,.28);transition:.2s" style-hover="box-shadow:0 0 36px rgba(255,140,80,.5);transform:translateY(-1px)">Open selected day route</button>
+      <button onClick="{{ copyPlan }}" style="appearance:none;cursor:pointer;padding:12px 22px;border-radius:999px;font-family:'Saira',sans-serif;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#e8ecf5;background:transparent;border:1px solid rgba(255,255,255,.18);transition:.2s" style-hover="border-color:#7fd8ff;color:#7fd8ff">Copy plan</button>
+      <button onClick="{{ sharePlan }}" style="appearance:none;cursor:pointer;padding:12px 22px;border-radius:999px;font-family:'Saira',sans-serif;font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#e8ecf5;background:transparent;border:1px solid rgba(255,255,255,.18);transition:.2s" style-hover="border-color:#ff5e8a;color:#ff8aa8">Share</button>
+    </div>
+  </section>
+
+  <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
+    <section style="margin-top:34px;padding:18px 20px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#8b94ac;margin-bottom:10px">Index legend</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:8px 28px;font-size:13px;font-weight:300;color:#b7bfd2;line-height:1.55">
+        <div><span style="color:#ff8aa8;font-weight:600">Bourdain Index</span> — 10: real story, real regulars, zero pretense — the kind of place that says something true about where you are. 7–8: independent and worth it, just a little more combed-hair. 5–6: here because it's good or because it's on the way, not because it has a soul.</div>
+        <div><span style="color:#7fd8ff;font-weight:600">Swan Match</span> — 10: closest to the Swan Oyster Depot ideal — a cramped seafood-first counter, walk up, no reservations, cold oysters, old-school to the bone.</div>
+      </div>
+    </section>
+  </sc-if>
+
+  <nav style="display:flex;gap:6px;position:sticky;top:0;z-index:9;margin-top:30px;padding:12px 0 0;background:rgba(10,12,20,.92);backdrop-filter:blur(10px)">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+      <button onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
+    </sc-for>
+  </nav>
+  <div style="height:1px;background:rgba(255,255,255,.1)"></div>
+
+  <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+    <section style="padding-top:26px">
+      <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
+        <h2 style="margin:0;font-size:32px;font-weight:300;letter-spacing:.08em;text-transform:uppercase">{{ dayDate }}</h2>
+        <div style="color:#8b94ac;font-weight:300;font-size:14px">{{ daySubtitle }}</div>
+      </div>
+
+      <sc-if value="{{ isFriday }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:18px;padding:14px 16px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02)">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7fd8ff">Arrival / first-food time</span>
+          <select value="{{ arrival }}" onChange="{{ onArrival }}" style="background:#0d1019;color:#f2f4fa;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 12px;font-size:13px">
+            <sc-for list="{{ arrivalOpts }}" as="t" hint-placeholder-count="3"><option value="{{ t }}">{{ t }}</option></sc-for>
+          </select>
+          <span style="color:#8b94ac;font-size:12px;font-weight:300">Flags the places that won't have the lights on yet.</span>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px;padding:16px 18px;border-radius:12px;border:1px solid rgba(127,216,255,.22);background:linear-gradient(180deg,rgba(95,212,255,.05),rgba(95,212,255,.015))">
+        <div style="flex:1;min-width:260px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#7fd8ff;margin-bottom:6px">Selected route</div>
+          <div style="font-size:13px;color:#c3cad9;line-height:1.7;font-weight:300">{{ routeText }}</div>
+        </div>
+        <a href="{{ routeUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;border:1px solid rgba(127,216,255,.45);color:#7fd8ff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:.2s" style-hover="background:rgba(127,216,255,.12)">Open live route</a>
+      </div>
+
+      <ul style="margin:18px 0 6px;padding:14px 18px 14px 34px;border-radius:12px;border:1px solid rgba(255,158,87,.25);background:linear-gradient(180deg,rgba(255,158,87,.05),transparent);color:#cfd5e2;font-size:13px;font-weight:300;line-height:1.5">
+        <sc-for list="{{ notes }}" as="n" hint-placeholder-count="2"><li style="margin:5px 0">{{ n }}</li></sc-for>
+      </ul>
+
+      <sc-for list="{{ slots }}" as="s" hint-placeholder-count="2">
+        <section style="margin:34px 0 10px">
+          <div style="display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px;margin-bottom:6px">
+            <div style="font-family:'IBM Plex Mono',monospace;color:#7fd8ff;font-size:13px;font-weight:600;letter-spacing:.14em;min-width:150px">{{ s.time }}</div>
+            <div style="font-size:20px;font-weight:600;letter-spacing:.1em;text-transform:uppercase">{{ s.title }}</div>
+          </div>
+          <p style="color:#8b94ac;font-size:13px;font-weight:300;margin:0 0 16px;line-height:1.5">{{ s.helper }}</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+            <sc-for list="{{ s.cards }}" as="c" hint-placeholder-count="3">
+              <div style="{{ c.style }}">
+                <div onClick="{{ c.select }}" style="{{ c.pickStyle }}"></div>
+                <sc-if value="{{ c.selected }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:16px;right:56px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#160d06;background:linear-gradient(90deg,#ffb864,#ff8a5c);padding:3px 8px;border-radius:999px;letter-spacing:.08em">P1</div></sc-if>
+                <sc-if value="{{ c.unavailable }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:16px;right:56px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#ffc9d4;background:rgba(255,94,138,.16);border:1px solid rgba(255,94,138,.4);padding:3px 8px;border-radius:999px;letter-spacing:.08em">NOT OPEN</div></sc-if>
+                <h3 style="font-size:17px;font-weight:600;margin:0 46px 8px 0;letter-spacing:.02em">{{ c.name }}</h3>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">
+                  <sc-for list="{{ c.badges }}" as="b" hint-placeholder-count="2"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#aeb7cb;text-transform:uppercase;letter-spacing:.1em">{{ b }}</span></sc-for>
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+                  <sc-for list="{{ c.scores }}" as="sc" hint-placeholder-count="1"><span style="{{ sc.style }}">{{ sc.txt }}</span></sc-for>
+                </div>
+                <div style="color:#c3cad9;font-size:13px;font-weight:300;line-height:1.5;min-height:56px">{{ c.desc }}</div>
+                <div style="font-size:12px;color:#8b94ac;margin-top:10px;line-height:1.5;font-weight:300"><strong style="color:#b7bfd2">{{ c.address }}</strong><br>{{ c.hours }}</div>
+                <sc-if value="{{ c.hasOrder }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-top:12px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.14);font-size:12px;color:#d8dde8;line-height:1.5;font-weight:300"><span style="color:#ffb27a;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase">Suggested move</span><br>{{ c.order }}</div>
+                </sc-if>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px">
+                  <sc-if value="{{ c.fixed }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#ffb27a;font-weight:600;letter-spacing:.16em;align-self:center">LOCKED</span></sc-if>
+                  <sc-if value="{{ c.notFixed }}" hint-placeholder-val="{{ true }}"><button onClick="{{ c.select }}" style="{{ c.btnStyle }}">{{ c.btnLabel }}</button></sc-if>
+                  <sc-if value="{{ c.hasAddress }}" hint-placeholder-val="{{ true }}">
+                    <a href="{{ c.dirUrl }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(127,216,255,.4);color:#7fd8ff;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="background:rgba(127,216,255,.12)">Directions</a>
+                    <a href="{{ c.mapUrl }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#c3cad9;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="border-color:#8b94ac">Map</a>
+                  </sc-if>
+                  <sc-if value="{{ c.hasIg }}" hint-placeholder-val="{{ false }}"><a href="{{ c.ig }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(255,94,138,.35);color:#ff8aa8;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="background:rgba(255,94,138,.1)">Instagram</a></sc-if>
+                  <sc-if value="{{ c.hasSite }}" hint-placeholder-val="{{ false }}"><a href="{{ c.site }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#c3cad9;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="border-color:#8b94ac">Site</a></sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <section style="margin-top:40px;padding:18px 20px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#ff9e57;margin-bottom:10px">Track ops · Traffic notes</div>
+    <ul style="margin:0;padding-left:18px;color:#b7bfd2;font-size:13px;font-weight:300;line-height:1.65">
+      <li><strong style="color:#e8ecf5">South Boundary Rd</strong> is the way in on a major-event weekend. Take it. This is not a debate.</li>
+      <li><strong style="color:#e8ecf5">Saturday:</strong> parked by 10:30 AM. Qualifying is the protected window — miss it and you'll hear about it all weekend.</li>
+      <li><strong style="color:#e8ecf5">Sunday:</strong> get in early, then outlast the first wave of people fleeing after the INDYCAR race. Patience is a traffic strategy.</li>
+      <li>No fake live traffic on this board — the route buttons hand you to Google Maps, which actually knows.</li>
+    </ul>
+  </section>
+
+  <div style="margin:26px 2px 8px;color:#68718a;font-size:11px;line-height:1.6;font-weight:300">Curated for one Monterey / Laguna Seca weekend, done right. Hours change, menus change, chefs quit on a Tuesday — hit the Instagram and website links before you drive. Your picks live only in your browser, between you and the machine.</div>
+</div>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#ffb864,#ff8a5c);color:#160d06;padding:11px 20px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.08em;z-index:50;box-shadow:0 8px 30px rgba(255,140,80,.35)">Copied</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;}}">
+class Component extends DCLogic {
+  state = { ready: false, day: 'friday', arrival: '09:00', sel: {}, toast: false };
+  componentDidMount() { this.waitData(); }
+  waitData() {
+    if (window.TRIP_DATA) {
+      const D = window.TRIP_DATA;
+      let sel = {};
+      try { sel = JSON.parse(localStorage.getItem('ls-selections') || '{}'); } catch (e) {}
+      Object.values(D.plan).forEach(d => d.slots.forEach(s => { if (!sel[s.id]) sel[s.id] = s.default; }));
+      this.setState({
+        ready: true, sel,
+        day: localStorage.getItem('ls-current-day') || 'friday',
+        arrival: localStorage.getItem('ls-friday-arrival') || '09:00'
+      }, () => this.persist());
+    } else setTimeout(() => this.waitData(), 80);
+  }
+  persist() {
+    localStorage.setItem('ls-selections', JSON.stringify(this.state.sel));
+    localStorage.setItem('ls-current-day', this.state.day);
+    localStorage.setItem('ls-friday-arrival', this.state.arrival);
+  }
+  D() { return window.TRIP_DATA; }
+  routeIds(day) {
+    const d = this.D().plan[day], ids = [d.origin];
+    d.slots.forEach(s => { const id = this.state.sel[s.id] || s.default; if (id && id !== 'skip') ids.push(id); });
+    ids.push(d.finish);
+    return ids.filter((id, i, a) => i === 0 || id !== a[i - 1]);
+  }
+  routeUrl(day) {
+    const addrs = this.routeIds(day).map(id => this.D().places[id].address).filter(Boolean);
+    if (addrs.length < 2) return '#';
+    let u = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=' + encodeURIComponent(addrs[0]) + '&destination=' + encodeURIComponent(addrs[addrs.length - 1]);
+    const w = addrs.slice(1, -1);
+    if (w.length) u += '&waypoints=' + encodeURIComponent(w.join('|'));
+    return u;
+  }
+  routeText(day) {
+    return this.routeIds(day).map(id => this.D().places[id].name.replace(' — Monterey Flagship', '').replace(' — Story Rd', '')).join('  →  ');
+  }
+  unavailable(pid) {
+    if (this.state.day !== 'friday') return false;
+    const p = this.D().places[pid];
+    if (p.open_hour === undefined) return false;
+    const parts = this.state.arrival.split(':');
+    const h = parseInt(parts[0], 10) + parseInt(parts[1], 10) / 60;
+    return h < p.open_hour || h >= p.close_hour;
+  }
+  planText() {
+    const lines = ['LAGUNA SECA GP WEEKEND — SELECTED PLAN'];
+    Object.entries(this.D().plan).forEach(([day, d]) => {
+      lines.push('', d.date + ' — ' + d.subtitle);
+      d.slots.forEach(s => {
+        const id = this.state.sel[s.id] || s.default;
+        if (id === 'skip') lines.push('• ' + s.time + ': skip');
+        else lines.push('• ' + s.time + ': ' + this.D().places[id].name + ' — ' + this.D().places[id].address);
+      });
+    });
+    return lines.join('\n');
+  }
+  setChoice(slotId, pid) {
+    this.setState(st => ({ sel: Object.assign({}, st.sel, { [slotId]: pid }) }), () => this.persist());
+  }
+  cardVM(pid, slot) {
+    const p = this.D().places[pid];
+    const selected = (this.state.sel[slot.id] || slot.default) === pid;
+    const unavailable = this.unavailable(pid);
+    const fixed = slot.type === 'fixed';
+    const scores = [];
+    if (p.bourdain != null) scores.push({ txt: 'Bourdain ' + p.bourdain + '/10', style: { fontFamily: "'IBM Plex Mono',monospace", fontSize: '10px', padding: '4px 9px', borderRadius: '999px', background: 'rgba(255,94,138,.12)', border: '1px solid rgba(255,94,138,.35)', color: '#ff8aa8', letterSpacing: '.06em' } });
+    if (p.swan != null) scores.push({ txt: 'Swan ' + p.swan + '/10', style: { fontFamily: "'IBM Plex Mono',monospace", fontSize: '10px', padding: '4px 9px', borderRadius: '999px', background: 'rgba(95,212,255,.1)', border: '1px solid rgba(127,216,255,.35)', color: '#7fd8ff', letterSpacing: '.06em' } });
+    const style = {
+      position: 'relative', borderRadius: '16px', padding: '18px',
+      background: 'linear-gradient(165deg, rgba(255,255,255,.035), rgba(255,255,255,.01) 40%), linear-gradient(165deg,#12141f,#0c0e17 65%)',
+      border: selected ? '1px solid rgba(255,158,87,.75)' : '1px solid rgba(255,255,255,.09)',
+      boxShadow: selected ? '0 0 0 1px rgba(255,158,87,.25), 0 0 30px rgba(255,120,60,.14), 0 12px 26px rgba(0,0,0,.35)' : '0 8px 20px rgba(0,0,0,.28)',
+      opacity: unavailable ? .55 : 1, transition: '.2s'
+    };
+    const pickStyle = {
+      position: 'absolute', right: '16px', top: '16px', width: '20px', height: '20px', borderRadius: '50%',
+      border: selected ? '6px solid #ff9e57' : '2px solid rgba(255,255,255,.3)',
+      cursor: fixed ? 'default' : 'pointer', transition: '.15s', boxShadow: selected ? '0 0 14px rgba(255,158,87,.5)' : 'none'
+    };
+    const btnStyle = {
+      appearance: 'none', cursor: 'pointer', padding: '7px 14px', borderRadius: '999px', fontFamily: "'Saira',sans-serif",
+      fontSize: '11px', fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', transition: '.2s',
+      background: selected ? 'linear-gradient(90deg,#ffb864,#ff8a5c)' : 'transparent',
+      color: selected ? '#160d06' : '#ffb27a', border: selected ? '1px solid transparent' : '1px solid rgba(255,158,87,.5)'
+    };
+    return {
+      name: p.name, badges: p.tags || [], scores, desc: p.desc, address: p.address || '', hours: p.hours || '',
+      hasOrder: !!p.order, order: p.order || '', selected, unavailable: unavailable && !selected ? true : unavailable,
+      fixed, notFixed: !fixed, style, pickStyle, btnStyle,
+      btnLabel: selected ? '✓ Selected' : 'Use this',
+      select: fixed ? () => {} : () => this.setChoice(slot.id, pid),
+      hasAddress: !!p.address, dirUrl: 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + encodeURIComponent(p.address || ''),
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.address || ''),
+      hasIg: !!p.instagram, ig: p.instagram || '', hasSite: !!p.website, site: p.website || ''
+    };
+  }
+  renderVals() {
+    const ready = this.state.ready && !!window.TRIP_DATA;
+    const showLegend = this.props.showLegend ?? true;
+    const dayIds = ['friday', 'saturday', 'sunday'];
+    const labels = { friday: 'Friday · Arrival', saturday: 'Saturday · Qualifying', sunday: 'Sunday · Race' };
+    const tabs = dayIds.map(id => {
+      const active = this.state.day === id;
+      return {
+        label: labels[id],
+        onClick: () => this.setState({ day: id }, () => this.persist()),
+        style: {
+          appearance: 'none', cursor: 'pointer', background: 'transparent', border: 'none',
+          borderBottom: active ? '2px solid #ff9e57' : '2px solid transparent',
+          color: active ? '#ffb27a' : '#8b94ac', padding: '10px 18px', fontFamily: "'Saira',sans-serif",
+          fontSize: '13px', fontWeight: active ? 600 : 400, letterSpacing: '.16em', textTransform: 'uppercase', transition: '.2s'
+        }
+      };
+    });
+    const gauges = [
+      { k: 'Friday Coffee Lock', v: 'Moonwake', color: '#5fd4ff' },
+      { k: 'Friday Swan Play', v: 'Oystertown', color: '#ff5e8a' },
+      { k: 'Saturday P1', v: 'Captain + Stoker', color: '#ff9e57' },
+      { k: 'Sunday Egress', v: 'Leave Late', color: '#ffd27f' }
+    ];
+    if (!ready) return { ready: false, showLegend, tabs, gauges, openRoute: () => {}, copyPlan: () => {}, sharePlan: () => {}, toast: false };
+    const day = this.D().plan[this.state.day];
+    return {
+      ready: true, showLegend, tabs, gauges, toast: this.state.toast,
+      isFriday: this.state.day === 'friday',
+      arrival: this.state.arrival,
+      arrivalOpts: ['07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00'],
+      onArrival: (e) => this.setState({ arrival: e.target.value }, () => this.persist()),
+      dayDate: day.date, daySubtitle: day.subtitle, notes: day.notes,
+      routeText: this.routeText(this.state.day), routeUrl: this.routeUrl(this.state.day),
+      slots: day.slots.map(s => ({ time: s.time, title: s.title, helper: s.helper || '', cards: s.options.map(id => this.cardVM(id, s)) })),
+      openRoute: () => window.open(this.routeUrl(this.state.day), '_blank'),
+      copyPlan: async () => {
+        await navigator.clipboard.writeText(this.planText());
+        this.setState({ toast: true });
+        setTimeout(() => this.setState({ toast: false }), 1200);
+      },
+      sharePlan: async () => {
+        const text = this.planText();
+        if (navigator.share) { try { await navigator.share({ title: 'Laguna Seca GP Weekend Plan', text }); return; } catch (e) {} }
+        await navigator.clipboard.writeText(text);
+        this.setState({ toast: true });
+        setTimeout(() => this.setState({ toast: false }), 1200);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
