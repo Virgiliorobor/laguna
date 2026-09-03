@@ -352,16 +352,16 @@ window.TRIP_DATA = {
       "bourdain": null,
       "swan": null
     },
-    "mezzaluna": {
-      "name": "Alfredo's Pastaria & Mozzarella Bar",
-      "address": "1188 Forest Ave, Pacific Grove, CA 93950",
-      "desc": "This was Mezzaluna until the chef sold it to Alfredo Ortiz — the guy who ran the room for years — and that's the best kind of succession story there is. Same kitchen, pasta and mozzarella still made by hand daily, because somebody in Pacific Grove still should. The strongest case on this trip for a night off from seafood.",
-      "order": "Share the mozzarella or the grilled octopus, then two or three different handmade pastas for the table. If the Dungeness crab cappellacci is on, that's the one to fight over.",
-      "tags": ["italian", "handmade pasta", "artisan"],
-      "hours": "Fri–Sun 5:00 PM–9:00 PM",
-      "website": "https://www.opentable.com/r/alfredos-pastaria-and-mozzarella-bar-pacific-grove",
-      "instagram": "https://www.instagram.com/alfredospastariaandmozzbar/",
-      "bourdain": 8,
+    "ilvecchio": {
+      "name": "Il Vecchio",
+      "address": "110 Central Ave, Pacific Grove, CA 93950",
+      "desc": "A Roman neighborhood trattoria that somehow landed in Pacific Grove and decided to act like nothing happened. Pasta made in-house, classics done straight, a room that fills with people who've been coming for years. The kind of Italian joint every town deserves and almost none still have — and the strongest case on this trip for a night off from seafood.",
+      "order": "Ask what pasta they're rolling today, then order the Roman classics without irony — carbonara, cacio e pepe — and a carafe of the house red for the table.",
+      "tags": ["italian", "trattoria", "handmade pasta"],
+      "hours": "Sat/Sun 11:30 AM–9:00 PM",
+      "website": "http://www.ilvecchiorestaurant.com/",
+      "instagram": "https://www.instagram.com/ilvecchiopg",
+      "bourdain": 8.5,
       "swan": null
     },
     "whalingstation": {
@@ -501,8 +501,8 @@ window.TRIP_DATA = {
           "title": "Post-track dinner",
           "type": "choice",
           "default": "wildfish",
-          "options": ["wildfish", "whalingstation", "mezzaluna", "spottedduck", "sandbar", "otherbrother"],
-          "helper": "Wild Fish for serious seafood. Whaling Station if qualifying earned a steak off a silver tray. Alfredo's for handmade pasta. Sandbar for the wharf. Other Brother if all you want is a beer and something with your hands."
+          "options": ["wildfish", "whalingstation", "ilvecchio", "spottedduck", "sandbar", "otherbrother"],
+          "helper": "Wild Fish for serious seafood. Whaling Station if qualifying earned a steak off a silver tray. Il Vecchio for trattoria pasta. Sandbar for the wharf. Other Brother if all you want is a beer and something with your hands."
         }
       ]
     },
@@ -540,8 +540,8 @@ window.TRIP_DATA = {
           "title": "Post-race dinner / beers",
           "type": "choice",
           "default": "otherbrother",
-          "options": ["otherbrother", "whalingstation", "mezzaluna", "alvarado", "sandbar", "wildfish"],
-          "helper": "Other Brother is the soft landing. Whaling Station or Alfredo's if the last night deserves a proper send-off. Sandbar or Wild Fish if the ocean's still calling."
+          "options": ["otherbrother", "whalingstation", "ilvecchio", "alvarado", "sandbar", "wildfish"],
+          "helper": "Other Brother is the soft landing. Whaling Station or Il Vecchio if the last night deserves a proper send-off. Sandbar or Wild Fish if the ocean's still calling."
         }
       ]
     },
