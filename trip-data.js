@@ -3,7 +3,7 @@ window.TRIP_DATA = {
     "sjc": {
       "name": "San José Mineta International Airport (SJC)",
       "address": "1701 Airport Blvd, San Jose, CA 95110",
-      "desc": "Where the weekend begins: fluorescent lights, rolling suitcases, and the smell of jet fuel and possibility. Get out fast. The good stuff is elsewhere.",
+      "desc": "Where the weekend begins and, come Monday, where it ends: fluorescent lights, rolling suitcases, jet fuel and possibility. On the way in, get out fast — the good stuff is elsewhere. On the way out, remember the rental needs gas.",
       "tags": ["arrival"],
       "hours": "24h airport",
       "website": "https://www.flysanjose.com/",
@@ -278,6 +278,78 @@ window.TRIP_DATA = {
       "bourdain": 7.5,
       "swan": null
     },
+    "captainpg": {
+      "name": "Captain + Stoker — Pacific Grove",
+      "address": "206 Forest Ave, Pacific Grove, CA 93950",
+      "desc": "The same Monterey roaster you trusted all weekend, shrunk down to a corner shop in Pacific Grove, minutes from Asilomar, lights on at 6:30. On getaway day, close and early beats clever.",
+      "order": "Ask what single origin they'd pull this morning. If Monday only gets one coffee stop, make it this one and don't overthink it.",
+      "tags": ["specialty coffee", "pacific grove", "early"],
+      "hours": "Mon 6:30 AM–4:00 PM",
+      "website": "https://captainandstoker.com/",
+      "instagram": "https://www.instagram.com/captainstoker/",
+      "bourdain": 6,
+      "swan": null
+    },
+    "cafeguarani": {
+      "name": "Café Guarani",
+      "address": "111 Central Ave, Pacific Grove, CA 93950",
+      "desc": "A family-run Paraguayan café with a real story behind the counter. Yerba mate, chipa, mbeyú, empanadas — food from somebody's actual home, not a focus group. The most interesting breakfast on this peninsula, and it happens to be open on a Monday.",
+      "order": "Chipa or mbeyú, plus an empanada. This is the Monday move — the breakfast with a story in it.",
+      "tags": ["breakfast", "paraguayan", "family-run"],
+      "hours": "Mon 8:00 AM–3:00 PM",
+      "website": "",
+      "instagram": "",
+      "bourdain": 9,
+      "swan": null
+    },
+    "redhouse": {
+      "name": "Red House Cafe",
+      "address": "662 Lighthouse Ave, Pacific Grove, CA 93950",
+      "desc": "Breakfast in an old red house that's been a Pacific Grove fixture forever. More combed-hair than Guarani, sure — but a proper sit-down send-off before the airport swallows you whole.",
+      "order": "Crab cake Benedict, the smoked salmon, or the cinnamon brioche French toast if you've stopped pretending this trip was about restraint.",
+      "tags": ["sit-down breakfast", "pacific grove", "brunch"],
+      "hours": "Mon 8:00 AM–2:30 PM",
+      "website": "",
+      "instagram": "",
+      "bourdain": 7,
+      "swan": null
+    },
+    "perfectcrumb": {
+      "name": "The Perfect Crumb Bakery",
+      "address": "650 Lighthouse Ave, Pacific Grove, CA 93950",
+      "desc": "A small local bakery doing pastries, breakfast sandwiches and espresso without ceremony. For the morning when the clock is winning and you need the goods handed over fast.",
+      "order": "Whatever pastry looks best in the case, or a breakfast sandwich to go. Eat it in the car like an adult with a flight to catch.",
+      "tags": ["bakery", "quick", "takeaway"],
+      "hours": "Mon from 6:30 AM",
+      "website": "",
+      "instagram": "",
+      "bourdain": 7.5,
+      "swan": null
+    },
+    "normalroute": {
+      "name": "Normal / Fastest Route",
+      "address": "",
+      "desc": "Let Google pick the fastest live route of the moment — which usually means abandoning the coast for US-101. Nobody ever wrote a song about the 101, but it gets you to the gate on time.",
+      "order": "Take this when the flight matters more than the view. The day's live-route button runs on current traffic, not wishful thinking.",
+      "tags": ["fastest", "live traffic", "no romance"],
+      "hours": "",
+      "website": "",
+      "instagram": "",
+      "bourdain": null,
+      "swan": null
+    },
+    "coastalroute": {
+      "name": "Coastal Route via Santa Cruz",
+      "address": "Santa Cruz, CA",
+      "desc": "Highway 1 along the water between the peninsula and Santa Cruz — Moss Landing, artichoke fields, the Pacific doing its slow gray magnificent thing — with Highway 17 over the mountains on the San Jose end. The long way, which is to say the right way, when time allows.",
+      "order": "Only with real margin on the clock. Open the live route, compare the ETA against the fast way, and be honest with yourself before committing.",
+      "tags": ["scenic", "highway 1", "santa cruz"],
+      "hours": "",
+      "website": "",
+      "instagram": "",
+      "bourdain": null,
+      "swan": null
+    },
     "skip": {
       "name": "Skip this stop",
       "address": "",
@@ -294,13 +366,14 @@ window.TRIP_DATA = {
   "plan": {
     "friday": {
       "date": "Friday · September 4",
-      "subtitle": "Arrival day · San Jose → Moonwake → Moss Landing / Monterey",
+      "subtitle": "Arrival day · San Jose → Santa Cruz coast → Moss Landing / Monterey",
       "origin": "sjc",
       "finish": "asilomar",
       "notes": [
         "Moonwake stays locked. Some things in life are non-negotiable; this is one of them.",
         "The first-bite slot bends to your arrival time and your appetite. Be honest about both.",
-        "Take the Moss Landing detour if you want lunch where the boats actually tie up. You do.",
+        "The coastal drive is the default now: Highway 17 over the hill, then Highway 1 south with the ocean on your right the whole way down.",
+        "Take the Moss Landing detour if you want lunch where the boats actually tie up. On the coastal route it's barely a detour at all.",
         "Oystertown is the Friday anchor — the nearest thing to Swan Oyster Depot this side of San Francisco."
       ],
       "slots": [
@@ -321,6 +394,15 @@ window.TRIP_DATA = {
           "default": "moonwake",
           "options": ["moonwake"],
           "helper": "Locked. Don't touch it."
+        },
+        {
+          "id": "fri_route_style",
+          "time": "Leaving San Jose",
+          "title": "The drive south",
+          "type": "choice",
+          "default": "coastalroute",
+          "options": ["coastalroute", "normalroute"],
+          "helper": "Coastal is the default because you already decided: Hwy 17 to Santa Cruz, then Highway 1 down the water. Fastest if the day is getting away from you."
         },
         {
           "id": "fri_route_lunch",
@@ -434,6 +516,54 @@ window.TRIP_DATA = {
           "default": "otherbrother",
           "options": ["otherbrother", "alvarado", "sandbar", "wildfish"],
           "helper": "Other Brother is the soft landing. Sandbar or Wild Fish if the ocean's still calling."
+        }
+      ]
+    },
+    "monday": {
+      "date": "Monday · September 7",
+      "subtitle": "Departure day · coffee → breakfast → one last look → SJC",
+      "origin": "asilomar",
+      "finish": "sjc",
+      "notes": [
+        "Getaway day. Coffee close to the hotel, a breakfast with a story, then choose your goodbye: fast or beautiful.",
+        "The coastal route north is the romantic's pick — take it only with time in the bank, and check the live ETA before you fall in love.",
+        "However you go, the finish line is SJC. Airlines are famously unmoved by how good the drive was."
+      ],
+      "slots": [
+        {
+          "id": "mon_coffee",
+          "time": "~7:00–7:45 AM",
+          "title": "Last coffee",
+          "type": "choice",
+          "default": "captainpg",
+          "options": ["captainpg", "sixover"],
+          "helper": "Captain + Stoker's Pacific Grove shop is minutes from Asilomar with the lights on at 6:30. Six Over if you want one last look at the guest-roaster board."
+        },
+        {
+          "id": "mon_breakfast",
+          "time": "~8:00–9:00 AM",
+          "title": "Monday breakfast",
+          "type": "choice",
+          "default": "cafeguarani",
+          "options": ["cafeguarani", "redhouse", "perfectcrumb", "skip"],
+          "helper": "Café Guarani is the one with the story. Red House if you want table service and an old house. Perfect Crumb when the clock is winning."
+        },
+        {
+          "id": "mon_route",
+          "time": "On the road",
+          "title": "The drive back",
+          "type": "choice",
+          "default": "normalroute",
+          "options": ["normalroute", "coastalroute"],
+          "helper": "Fastest gets you to the gate. Coastal gets you Highway 1, Moss Landing one more time, and Hwy 17 over the mountains — only with real margin."
+        },
+        {
+          "id": "mon_airport",
+          "time": "Wheels up",
+          "title": "SJC — end of the line",
+          "type": "fixed",
+          "default": "sjc",
+          "options": ["sjc"]
         }
       ]
     }

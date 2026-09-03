@@ -34,14 +34,14 @@ select{font-family:'IBM Plex Mono',monospace}
       <div style="width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,158,87,.8);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#ffb27a">LS</div>
       <div style="font-size:13px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:#e8ecf5">Laguna Seca <span style="color:#8b94ac;font-weight:300">· Weekend Board</span></div>
     </div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8b94ac">SEP 04–06 · MONTEREY, CA</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8b94ac">SEP 04–07 · MONTEREY, CA</div>
   </div>
   <div style="height:2px;background:linear-gradient(90deg,#5fd4ff,#ff5e8a 45%,#ff9e57 75%,transparent);opacity:.85"></div>
 
   <section style="padding:44px 2px 8px">
     <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#ff9e57;margin-bottom:14px">Mission Foods Grand Prix of Monterey</div>
     <h1 style="margin:0;font-size:clamp(38px,6vw,72px);font-weight:200;letter-spacing:.06em;text-transform:uppercase;line-height:1.02">Race Weekend<br><span style="font-weight:700;background:linear-gradient(90deg,#5fd4ff,#ff5e8a 55%,#ff9e57);-webkit-background-clip:text;background-clip:text;color:transparent">Trip Board</span></h1>
-    <p style="max-width:760px;color:#97a0b8;line-height:1.65;font-weight:300;margin:18px 0 0;font-size:15px">Three days, one racetrack, and a fighting chance at eating like you actually give a damn. Every slot has a default — the pick — plus a few worthy contenders. Change your mind and the route changes with you. The map buttons hand you off to Google, who knows the traffic better than either of us.</p>
+    <p style="max-width:760px;color:#97a0b8;line-height:1.65;font-weight:300;margin:18px 0 0;font-size:15px">Four days, one racetrack, and a fighting chance at eating like you actually give a damn. Every slot has a default — the pick — plus a few worthy contenders. Change your mind and the route changes with you. The map buttons hand you off to Google, who knows the traffic better than either of us.</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:34px">
       <sc-for list="{{ gauges }}" as="g" hint-placeholder-count="4">
@@ -269,8 +269,8 @@ class Component extends DCLogic {
   renderVals() {
     const ready = this.state.ready && !!window.TRIP_DATA;
     const showLegend = this.props.showLegend ?? true;
-    const dayIds = ['friday', 'saturday', 'sunday'];
-    const labels = { friday: 'Friday · Arrival', saturday: 'Saturday · Qualifying', sunday: 'Sunday · Race' };
+    const dayIds = ['friday', 'saturday', 'sunday', 'monday'];
+    const labels = { friday: 'Friday · Arrival', saturday: 'Saturday · Qualifying', sunday: 'Sunday · Race', monday: 'Monday · Departure' };
     const tabs = dayIds.map(id => {
       const active = this.state.day === id;
       return {
@@ -288,7 +288,8 @@ class Component extends DCLogic {
       { k: 'Friday Coffee Lock', v: 'Moonwake', color: '#5fd4ff' },
       { k: 'Friday Swan Play', v: 'Oystertown', color: '#ff5e8a' },
       { k: 'Saturday P1', v: 'Captain + Stoker', color: '#ff9e57' },
-      { k: 'Sunday Egress', v: 'Leave Late', color: '#ffd27f' }
+      { k: 'Sunday Egress', v: 'Leave Late', color: '#ffd27f' },
+      { k: 'Monday Goodbye', v: 'Fast or Hwy 1', color: '#7fd8ff' }
     ];
     if (!ready) return { ready: false, showLegend, tabs, gauges, openRoute: () => {}, copyPlan: () => {}, sharePlan: () => {}, toast: false };
     const day = this.D().plan[this.state.day];
