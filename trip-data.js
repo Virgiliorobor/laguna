@@ -376,6 +376,30 @@ window.TRIP_DATA = {
       "bourdain": 9,
       "swan": null
     },
+    "big5": {
+      "name": "Big 5 Sporting Goods",
+      "address": "2259 N Fremont St, Monterey, CA 93940",
+      "desc": "Nobody writes poetry about a Big 5, and nobody should. But three days on a Laguna Seca hillside without a chair is a rookie mistake you only make once, and the veterans in the good spots all made it years ago. In, chairs, out. Ten minutes.",
+      "order": "Folding chairs for everyone, and whatever else the hillside demands — hat, sunscreen if you forgot it. This is logistics, not romance.",
+      "tags": ["pit stop", "race chairs", "optional"],
+      "hours": "Daily retail hours — check before counting on it",
+      "website": "https://www.big5sportinggoods.com/",
+      "instagram": "",
+      "bourdain": null,
+      "swan": null
+    },
+    "wholefoods": {
+      "name": "Whole Foods Market — Del Monte Center",
+      "address": "800 Del Monte Center, Monterey, CA 93940",
+      "desc": "Not a food destination — a supply depot with a good beer aisle. Cooler beer, ice, water, and food that survives a day at a racetrack, all in one sweep, at prices that only look bad until you see what the track charges for the same can.",
+      "order": "Beer for the house, water for the track, ice, and nothing that needs a refrigerator by turn 11. Load the cooler and move on.",
+      "tags": ["pit stop", "supplies", "optional"],
+      "hours": "Daily 8:00 AM–9:00 PM — check before counting on it",
+      "website": "https://www.wholefoodsmarket.com/stores/monterey",
+      "instagram": "",
+      "bourdain": null,
+      "swan": null
+    },
     "skip": {
       "name": "Skip this stop",
       "address": "",
@@ -438,6 +462,24 @@ window.TRIP_DATA = {
           "default": "skip",
           "options": ["skip", "seaharvest_moss", "woodward", "phils", "meatery"],
           "helper": "Sea Harvest is the smart default. Woodward is the one the locals would rather you didn't know about. Phil's is the famous one — read the card before you commit, there's a catch."
+        },
+        {
+          "id": "fri_pit_big5",
+          "time": "Rolling into Monterey",
+          "title": "Pit stop · race chairs",
+          "type": "choice",
+          "default": "skip",
+          "options": ["skip", "big5"],
+          "helper": "Optional. Chairs for the hillside — the people in the good spots brought theirs, and by Sunday you'll know why."
+        },
+        {
+          "id": "fri_pit_supplies",
+          "time": "Before check-in",
+          "title": "Pit stop · beer & supplies",
+          "type": "choice",
+          "default": "skip",
+          "options": ["skip", "wholefoods"],
+          "helper": "Optional. Beer, ice and track food for the weekend — bought now, at Del Monte Center, instead of at gate prices later."
         },
         {
           "id": "fri_checkin",
