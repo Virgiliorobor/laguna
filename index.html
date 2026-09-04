@@ -93,6 +93,7 @@ select{font-family:'IBM Plex Mono',monospace}
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
           <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ false }}">
             <a href="{{ nextUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#160d06;background:linear-gradient(90deg,#ffb864,#ff8a5c);box-shadow:0 0 18px rgba(255,140,80,.25);transition:.2s" style-hover="box-shadow:0 0 30px rgba(255,140,80,.45)">Next: {{ nextName }}</a>
+            <a href="{{ nextWazeUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;border:1px solid rgba(81,214,255,.5);color:#51d6ff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:.2s" style-hover="background:rgba(81,214,255,.12)">Next in Waze</a>
           </sc-if>
           <a href="{{ routeUrl }}" target="_blank" style="padding:11px 18px;border-radius:999px;border:1px solid rgba(127,216,255,.45);color:#7fd8ff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:.2s" style-hover="background:rgba(127,216,255,.12)">Open live route</a>
           <sc-if value="{{ anyDone }}" hint-placeholder-val="{{ false }}">
@@ -137,6 +138,7 @@ select{font-family:'IBM Plex Mono',monospace}
                   <sc-if value="{{ c.notFixed }}" hint-placeholder-val="{{ true }}"><button onClick="{{ c.select }}" style="{{ c.btnStyle }}">{{ c.btnLabel }}</button></sc-if>
                   <sc-if value="{{ c.hasAddress }}" hint-placeholder-val="{{ true }}">
                     <a href="{{ c.dirUrl }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(127,216,255,.4);color:#7fd8ff;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="background:rgba(127,216,255,.12)">Directions</a>
+                    <a href="{{ c.wazeUrl }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(81,214,255,.45);color:#51d6ff;font-size:11px;font-weight:600;letter-spacing:.06em;transition:.2s" style-hover="background:rgba(81,214,255,.12)">Waze</a>
                     <a href="{{ c.mapUrl }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#c3cad9;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="border-color:#8b94ac">Map</a>
                   </sc-if>
                   <sc-if value="{{ c.hasIg }}" hint-placeholder-val="{{ false }}"><a href="{{ c.ig }}" target="_blank" style="padding:7px 12px;border-radius:999px;border:1px solid rgba(255,94,138,.35);color:#ff8aa8;font-size:11px;font-weight:500;letter-spacing:.06em;transition:.2s" style-hover="background:rgba(255,94,138,.1)">Instagram</a></sc-if>
@@ -291,6 +293,7 @@ class Component extends DCLogic {
       btnLabel: selected ? '✓ Selected' : 'Use this',
       select: fixed ? () => {} : () => this.setChoice(slot.id, pid),
       hasAddress: !!p.address, dirUrl: 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + encodeURIComponent(p.address || ''),
+      wazeUrl: 'https://waze.com/ul?q=' + encodeURIComponent(p.address || '') + '&navigate=yes',
       mapUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.address || ''),
       hasIg: !!p.instagram, ig: p.instagram || '', hasSite: !!p.website, site: p.website || ''
     };
@@ -331,6 +334,7 @@ class Component extends DCLogic {
       hasNext: !!this.nextSlot(this.state.day),
       nextName: (() => { const n = this.nextSlot(this.state.day); return n ? this.D().places[this.state.sel[n.id] || n.default].name.split(' — ')[0].split(' / ')[0] : ''; })(),
       nextUrl: (() => { const n = this.nextSlot(this.state.day); return n ? 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + encodeURIComponent(this.D().places[this.state.sel[n.id] || n.default].address) : '#'; })(),
+      nextWazeUrl: (() => { const n = this.nextSlot(this.state.day); return n ? 'https://waze.com/ul?q=' + encodeURIComponent(this.D().places[this.state.sel[n.id] || n.default].address) + '&navigate=yes' : '#'; })(),
       resetDay: () => {
         this.setState(st => {
           const done = Object.assign({}, st.done);
